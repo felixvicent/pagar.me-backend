@@ -1,11 +1,8 @@
-'use strict';
+/* eslint-disable import/order */
+const app = require("./bin/express");
 
-const app = require('./bin/express');
+const server = require("http").Server(app);
 
-const server = require('http').Server(app);
+const port = process.env.PORT || 3333;
 
-let port = process.env.PORT || 3333;
-
-server.listen(port, () => {
-  console.log('LIVE');
-});
+server.listen(port);

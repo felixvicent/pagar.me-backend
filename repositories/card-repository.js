@@ -1,32 +1,33 @@
-require('../models/card-model');
+require("../models/card-model");
 
-const base = require('../bin/base/repository-base');
+const Base = require("../bin/base/repository-base");
 
 class cardRepositoy {
-  constructor(){
-    this._base = new base('Card')
+  constructor() {
+    this.base = new Base("Card");
   }
 
-  async getMyAll(user){
-    return await this._base.getMyAll(user);
+  async getMyAll(user) {
+    return this.base.getMyAll(user);
   }
 
-  async getById(id){
-    return await this._base.getById(id);
+  async getById(id) {
+    return this.base.getById(id);
   }
 
-  async delete(id, user){
-    let model = await this._base.getById(id);
+  async delete(id, user) {
+    const model = await this.base.getById(id);
 
-    if(model.userId.toString() === user._id){
-      return await this._base.delete(id);
+    // eslint-disable-next-line no-underscore-dangle
+    if (model.userId.toString() === user._id) {
+      return this.base.delete(id);
     }
 
-    return 'Operação inválida';
+    return "Operação inválida";
   }
 
-  async create(data){
-    let card = await this._base.create(data);
+  async create(data) {
+    const card = await this.base.create(data);
 
     return card;
   }

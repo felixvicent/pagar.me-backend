@@ -1,29 +1,30 @@
-require('../models/transaction-model');
+require("../models/transaction-model");
 
-const base = require('../bin/base/repository-base');
+const Base = require("../bin/base/repository-base");
 
 class transactionRepositoy {
-  constructor(){
-    this._base = new base('Transaction')
+  constructor() {
+    this.base = new Base("Transaction");
   }
 
-  async getMyAll(user){
-    return await this._base.getMyAll(user);
+  async getMyAll(user) {
+    return this.base.getMyAll(user);
   }
 
-  async delete(id, user){
-    let model = await this._base.getById(id);
+  async delete(id, user) {
+    const model = await this.base.getById(id);
 
-    if(model.userId.toString() === user._id){
-      return await this._base.delete(id);
+    // eslint-disable-next-line no-underscore-dangle
+    if (model.userId.toString() === user._id) {
+      return this.base.delete(id);
     }
 
-    return 'Operação inválida';
+    return "Operação inválida";
   }
 
-  async create(data){
-    let transaction = await this._base.create(data);
-    
+  async create(data) {
+    const transaction = await this.base.create(data);
+
     return transaction;
   }
 }

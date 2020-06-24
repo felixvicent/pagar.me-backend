@@ -1,16 +1,14 @@
-'use strict';
+const express = require("express");
 
-const express = require('express');
-
-const controller = require('../controllers/transaction-controller');
-const auth = require('../middlewares/authentication');
+const Controller = require("../controllers/transaction-controller");
+const auth = require("../middlewares/authentication");
 
 const router = express.Router();
 
-let _ctrl = new controller();
+const ctrl = new Controller();
 
-router.get('/', auth, _ctrl.get);
-router.post('/', auth, _ctrl.post);
-router.delete('/:id', auth, _ctrl.delete);
+router.get("/", auth, ctrl.get);
+router.post("/", auth, ctrl.post);
+router.delete("/:id", auth, ctrl.delete);
 
 module.exports = router;

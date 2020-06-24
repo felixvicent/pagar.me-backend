@@ -1,36 +1,32 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
-const variables = require('../bin/configuration/variables');
-const usuario = require('../models/user-model');
+const variables = require("../bin/configuration/variables");
+const usuario = require("../models/user-model");
 
 module.exports = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  const [token] = authHeader.split(' ');
+  const [token] = authHeader.split(" ");
 
-  if(token){
+  if (token) {
     try {
-      let decoded = await jwt.verify(token, variables.Security.secretKey);
+      const decoded = await jwt.verify(token, variables.Security.secretKey);
 
       req.usuarioLogado = decoded;
 
-      let userExiste = await usuario.findById(req.usuarioLogado.user._id);
+      // eslint-disable-next-line no-underscore-dangle
+      const userExiste = await usuario.findById(req.usuarioLogado.user._id);
 
-      if(!userExiste){
-        res.status(401).send({ message: 'Usuário não existe' });
-        
+      if (!userExiste) {
+        res.status(401).send({ message: "Usuário não existe" });
+
         return;
       }
 
       next();
     } catch (e) {
-      res.status(401).send({ message: 'Token inválido' });
-
-      return;
+      res.status(401).send({ message: "Token inválido" });
     }
+  } else {
+    res.status(401).send({ message: "Token inválido" });
   }
-  else{
-    res.status(401).send({ message: 'Token inválido' });
-
-    return;
-  }
-}
+};

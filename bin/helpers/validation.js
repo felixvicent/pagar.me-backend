@@ -1,42 +1,40 @@
-'use strict';
-
 class ValidationContract {
-  constructor(){
-    this._errors = [];
+  constructor() {
+    this.errors = [];
   }
 
-  isNotArrayEmpty(value, message){
-    if(!value && value.length === 0){
-      this._errors.push({ message: message })
+  isNotArrayEmpty(value, message) {
+    if (!value && value.length === 0) {
+      this.errors.push({ message });
     }
   }
 
-  isTrue(value, message){
-    if(value){
-      this._errors.push({ message: message })
+  isTrue(value, message) {
+    if (value) {
+      this.errors.push({ message });
     }
   }
 
-  isRequired(value, message){
-    if(!value || value.length <= 0){
-      this._errors.push({ message: message });
+  isRequired(value, message) {
+    if (!value || value.length <= 0) {
+      this.errors.push({ message });
     }
   }
 
-  isEmail(value, message){
-    var reg = new RegExp(/^\w+([-+,']\w+)*@\w+([-,]\w+)*\.\w+([-.]\w+)*$/);
+  isEmail(value, message) {
+    const reg = new RegExp(/^\w+([-+,']\w+)*@\w+([-,]\w+)*\.\w+([-.]\w+)*$/);
 
-    if(!reg.test(value)){
-      this._errors.push({ message: message });
+    if (!reg.test(value)) {
+      this.errors.push({ message });
     }
   }
 
-  errors(){
-    return this._errors;
+  errors() {
+    return this.errors;
   }
 
-  isValid(){
-    return this._errors.length === 0;
+  isValid() {
+    return this.errors.length === 0;
   }
 }
 

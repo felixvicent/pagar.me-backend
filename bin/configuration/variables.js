@@ -1,15 +1,15 @@
-require('dotenv').config()
+require("dotenv").config();
 
 const variables = {
   Database: {
-    connection: process.env.connection
+    connection: process.env.connection,
   },
   Security: {
-    secretKey: process.env.secretKey
+    secretKey: process.env.secretKey,
   },
   Pagarme: {
-    pagarmeKey: process.env.pagarmeKey
-  }
-}
+    pagarmeKey: process.env.pagarmeKey,
+  },
+};
 
 module.exports = variables;
