@@ -26,9 +26,17 @@ class baseRepository {
   async getAll(){
     return await this._model.find();
   }
+  
+  async getMyAll(usuario){
+    return await this._model.find({ userId: user._id });
+  }
 
   async delete(id){
     return await this._model.findByIdAndDelete(id);
+  }
+
+  async getById(id){
+    return await this._model.findById(id);
   }
 }
 

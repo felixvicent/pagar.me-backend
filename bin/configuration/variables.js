@@ -8,7 +8,7 @@ const variables = {
     secretKey: process.env.secretKey
   },
   Pagarme: {
-    pagarmeKey: process.env.pagarme
+    pagarmeKey: process.env.pagarmeKey
   }
 }
 

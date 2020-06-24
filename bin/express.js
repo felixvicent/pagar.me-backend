@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const variables = require('../bin/configuration/variables');
 const userRouter = require('../routes/user-router');
+const cardRouter = require('../routes/card-router');
+const transactionRouter = require('../routes/transaction-router');
 
 const app = express();
 
@@ -18,3 +20,5 @@ mongoose.connect(variables.Database.connection, {
 });
 
 app.use('/api/user', userRouter);
+app.use('/api/card', cardRouter);
+app.use('/api/transaction', transactionRouter);

@@ -32,6 +32,10 @@ class userRepository{
     return userR;
   }
 
+  async updatePayment(data, userId){
+    return await this._base.update(userId, { payDay: data })
+  }
+
   async update(id, data, usuarioLogado){
     if(usuarioLogado._id === id){
       if(data.oldPassword !== data.password && data.oldPassword && data.password !== undefined & data.passwordConfirm !== undefined && data.password === data.passwordConfirm) {

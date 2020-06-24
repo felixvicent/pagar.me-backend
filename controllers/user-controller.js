@@ -36,7 +36,10 @@ userController.prototype.post = async(req, res) => {
     ctrlBase.post(_repo, _validationContract, req, res);
   }
   catch(e){
-    res.status(500).send({ message: 'Internal server error' });
+    res.status(500).send({
+      message: 'Internal server error',
+      erro: e.toString(),
+    });
   }
 };
 

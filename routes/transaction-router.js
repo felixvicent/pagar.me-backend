@@ -2,18 +2,15 @@
 
 const express = require('express');
 
-const controller = require('../controllers/user-controller');
+const controller = require('../controllers/transaction-controller');
 const auth = require('../middlewares/authentication');
 
 const router = express.Router();
 
 let _ctrl = new controller();
 
-router.post('/register',  _ctrl.post);
-router.post('/authenticate',  _ctrl.authenticate);
-
 router.get('/', auth, _ctrl.get);
-router.put('/:id', auth, _ctrl.put);
+router.post('/', auth, _ctrl.post);
 router.delete('/:id', auth, _ctrl.delete);
 
 module.exports = router;

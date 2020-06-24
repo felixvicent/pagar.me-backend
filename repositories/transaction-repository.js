@@ -1,0 +1,31 @@
+require('../models/transaction-model');
+
+const base = require('../bin/base/repository-base');
+
+class transactionRepositoy {
+  constructor(){
+    this._base = new base('Transaction')
+  }
+
+  async getMyAll(user){
+    return await this._base.getMyAll(user);
+  }
+
+  async delete(id, user){
+    let model = await this._base.getById(id);
+
+    if(model.userId.toString() === user._id){
+      return await this._base.delete(id);
+    }
+
+    return 'Operação inválida';
+  }
+
+  async create(data){
+    let transaction = await this._base.create(data);
+    
+    return transaction;
+  }
+}
+
+module.exports = transactionRepositoy;

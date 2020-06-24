@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const schema = mongoose.Schema;
 const { ObjectId } = mongoose.Schema;
@@ -19,6 +20,10 @@ const userModel = new schema({
     required: true,
     default: true,
   },
+  payDay: {
+    type: Date,
+    default: Date.now,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -30,8 +35,10 @@ const userModel = new schema({
 
 userModel.pre('save', next => {
   let now = new Date();
+  const datav = new Date(moment().add(7, 'days')._d.toIsoString());
   
   if(!this.createdAt) this.createdAt = now;
+  if(!this.payDay) this.createdAt = datav;
 
   next()
 });

@@ -5,7 +5,7 @@ const usuario = require('../models/user-model');
 
 module.exports = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  const [token ] = authHeader.split(' ');
+  const [token] = authHeader.split(' ');
 
   if(token){
     try {
